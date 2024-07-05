@@ -2,20 +2,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth');
+const financialRoutes = require('./routes/finance');
+const auth = require('./middleware/auth');
 
 const app = express();
 
 //middleware
 app.use(bodyParser.json());
 
-// Routes
+//Routes
 app.use('/api/auth', authRoutes);
-
-
-//Basic route
-app.get('/api', (req, res)=>{
-    res.send('Hello from the back-end');
-});
+app.use('/api/finance', financialRoutes);
 
 //Connect to MongoDB
 const dbURI = 'mongodb://localhost:27017/mydatabase';
